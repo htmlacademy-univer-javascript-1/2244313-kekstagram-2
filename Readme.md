@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Юлия Лабутина](https://up.htmlacademy.ru/univer-js1/2/user/2244313).
-* Наставник: `Неизвестно`.
+* Наставник: [Алена Cафьянникова](https://htmlacademy.ru/profile/safyann).
 
 ---
 
