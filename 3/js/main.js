@@ -5,10 +5,6 @@ function getRandomPositiveInteger (a, b) {
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 }
-//Функция для проверки максимальной длины строки
-function checkStringLength(string, length) {
-  return string.length <= length;
-}
 //Функция, генерирующаю число,которое не повторяется из диапазона включительно
 function createRandom (min, max) {
   const previousValues = [];
@@ -61,7 +57,5 @@ const createDescriptionPhotoUser = () => ({
 //Функция, для вызова N-го количества раз
 const numberPhotoUsers = Array.from({length:25},createDescriptionPhotoUser);
 
-console.log (
-  numberPhotoUsers
-);
+numberPhotoUsers();
 
