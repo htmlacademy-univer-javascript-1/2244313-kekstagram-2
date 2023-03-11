@@ -1,6 +1,8 @@
+
 import {getRandomPositiveInteger, createRandom } from 'js/util.js';
 
-const generateNumber = createRandom(1, 25);
+const generateNumberId = createRandom(1, 25);
+const generateNumberUrl = createRandom(1, 25);
 const generateNumberComment = createRandom(0, 1000);
 
 const MESSAGE = ['Всё отлично!',
@@ -19,21 +21,24 @@ const randomIndexImg = getRandomPositiveInteger(0, IMG.length - 1);
 
 // Функция,возвращающая объект данных- описание фотографии, опубликованной пользователем.
 const createDescriptionPhotoUser = () => ({
-  return: {
-    id: generateNumber(),
-    url: `photos/${generateNumber()}.jpg`,
-    description: 'Фото для Кекстаграма',
-    likes: getRandomPositiveInteger(15, 200),
-    comments: [{
-      id: generateNumberComment(),
-      avatar: IMG[randomIndexImg],
-      message: MESSAGE[randomIndexMessage],
-      name: NAME[randomIndexName],
-    },],
-  }
+
+  id: generateNumberId(),
+  url: `photos/${generateNumberUrl()}.jpg`,
+  description: 'Фото для Кекстаграма',
+  likes: getRandomPositiveInteger(15, 200),
+  comments: [{
+    id: generateNumberComment(),
+    avatar: IMG[randomIndexImg],
+    message: MESSAGE[randomIndexMessage],
+    name: NAME[randomIndexName],
+  },],
+
 });
 
+const PHOTOLENGTH = 25;
 //Функция, для вызова N-го количества раз
-const numberPhotoUsers = Array.from({ length: 25 }, createDescriptionPhotoUser);
+const  numberPhotoUsers = Array.from({ length: PHOTOLENGTH }, createDescriptionPhotoUser);
 
-numberPhotoUsers();
+
+// eslint-disable-next-line no-unused-expressions
+numberPhotoUsers;
