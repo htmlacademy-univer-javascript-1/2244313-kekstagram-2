@@ -1,5 +1,5 @@
 
-import {getRandomPositiveInteger, createRandom } from 'js/util.js';
+import {getRandomPositiveInteger, createRandom } from './util.js';
 
 const generateNumberId = createRandom(1, 25);
 const generateNumberUrl = createRandom(1, 25);
