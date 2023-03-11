@@ -1,2 +1,2 @@
-import 'js/data.js';
+import './data.js';
 
