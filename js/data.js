@@ -41,5 +41,5 @@ const numberPhotoUsers = Array.from({ length: PHOTOLENGTH }, createDescriptionPh
 
 // eslint-disable-next-line no-unused-expressions
 
-export { numberPhotoUsers };
+export { numberPhotoUsers, createComment, createDescriptionPhotoUser };
 
