@@ -5,13 +5,12 @@ const photoUser = document.querySelector('#upload-file');
 const input = document.querySelector('.text__hashtags');//относится к хештегу!
 
 const body=document.querySelector('body');
-
-
+const inputComments = document.querySelector('.text__description');
+//const imgPreview = document.querySelector('.img-upload__preview img');//для замены на пользовательское
 start.onchange = function () {
-  // input.onfocus = function (event) { console.log('ff'); event.stopPropagation(); };
   imgOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  imgPreview.src = photoUser.value;
+// imgPreview.src = photoUser.value;
 };
 
 const cancel = document.querySelector('.img-upload__cancel');
@@ -29,8 +28,19 @@ document.addEventListener('keydown', (evt) => {
     photoUser.value = '';
   }
 });
-
-
+//отмена escape для хештегов и комментов
+input.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    evt.stopPropagation();
+  }
+});
+inputComments.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    evt.stopPropagation();
+  }
+});
 // показ сообщения,что сообщение отправлено БЛОК РАБОТАЕТ КАК НАДО
 const showSuccessMessageModal = () => {
   const successModal = document.querySelector('#success').content.querySelector('.success');
@@ -76,54 +86,18 @@ const showErrorMessageModal = () =>{
   document.body.append(clonedErrorModal);
 };
 
-//валидация хештегов
 const form = document.querySelector('.img-upload__form');
-const pristine = new Pristine(form);
+//валидация хештегов
+function hashtagsValid(){const pristine = new Pristine(form);
+  const hashtags = (value) => value.toLowerCase().split(' ');
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  if (input.value !== '') {
-    hashtagsValid();
-  }
-  else {
-    showSuccessMessageModal();
-    imgOverlay.classList.add('hidden');
-    body.classList.remove('modal-open');
-    photoUser.value = '';//позволяет загрузить одну и ту же фотку
-    input.value = '';
-  }
+  pristine.addValidator(document.querySelector('[name="hashtags"]'),
+    (value) => hashtags(value).length <= 5,);
+  return true;}
 
-}
-);
-//валидация
-function hashtagsValid(){
-  const hashtagSplit = input.value.split(' ');
-  const hashtags = [];
-  for (let i = 0; i <= hashtagSplit.length - 1; i++) {
-    const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-    //проверкана валидность 1 хештега
-    if (re.test(hashtagSplit[i]) === true) {
-      hashtags.push(hashtagSplit[i]);
-    }
-  }
-  if (hashtags.length === hashtagSplit.length && hashtagSplit.length <= 5) {
-    const isValid = pristine.validate();
-    if (isValid) {
-      showSuccessMessageModal();
-      imgOverlay.classList.add('hidden');
-      body.classList.remove('modal-open');
-      photoUser.value = '';//позволяет загрузить одну и ту же фотку
-      input.value = '';
-    }
-    else {
-      showErrorMessageModal();
-    }
-  }
-}
-// escape и хештеги с коментами
-/*function focusEscape() {
-  console.log('f');
-}
-focusEscape();
-input.addEventListener('focus', focusEscape, true);
-//*/
+
+form.addEventListener('submit', () => {
+  if(hashtagsValid()){console.log('валидно')}
+  else{console.log('не валидно');}
+});
+
