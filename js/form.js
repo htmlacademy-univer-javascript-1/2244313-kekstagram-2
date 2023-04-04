@@ -1,16 +1,16 @@
+import './hashtadsvalid.js';
+import { input,hashtagsValid } from './hashtadsvalid.js';
 const imgOverlay = document.querySelector('.img-upload__overlay');
 const start = document.querySelector('.img-upload__start input');
 
 const photoUser = document.querySelector('#upload-file');
-const input = document.querySelector('.text__hashtags');//относится к хештегу!
 
 const body=document.querySelector('body');
-const inputComments = document.querySelector('.text__description');
-//const imgPreview = document.querySelector('.img-upload__preview img');//для замены на пользовательское
+const imgPreview = document.querySelector('.img-upload__preview img');//для замены на пользовательское
 start.onchange = function () {
   imgOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-// imgPreview.src = photoUser.value;
+  imgPreview.src = photoUser.value;
 };
 
 const cancel = document.querySelector('.img-upload__cancel');
@@ -28,19 +28,7 @@ document.addEventListener('keydown', (evt) => {
     photoUser.value = '';
   }
 });
-//отмена escape для хештегов и комментов
-input.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    evt.stopPropagation();
-  }
-});
-inputComments.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    evt.stopPropagation();
-  }
-});
+
 // показ сообщения,что сообщение отправлено БЛОК РАБОТАЕТ КАК НАДО
 const showSuccessMessageModal = () => {
   const successModal = document.querySelector('#success').content.querySelector('.success');
@@ -87,17 +75,30 @@ const showErrorMessageModal = () =>{
 };
 
 const form = document.querySelector('.img-upload__form');
-//валидация хештегов
-function hashtagsValid(){const pristine = new Pristine(form);
-  const hashtags = (value) => value.toLowerCase().split(' ');
+const pristine = new Pristine(form);
+pristine.addValidator(document.querySelector('[name="hashtags"]'), hashtagsValid);
 
-  pristine.addValidator(document.querySelector('[name="hashtags"]'),
-    (value) => hashtags(value).length <= 5,);
-  return true;}
-
-
-form.addEventListener('submit', () => {
-  if(hashtagsValid()){console.log('валидно')}
-  else{console.log('не валидно');}
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  if (input.value==='') {
+    showSuccessMessageModal();
+    imgOverlay.classList.add('hidden');
+    body.classList.remove('modal-open');
+    photoUser.value = '';//позволяет загрузить одну и ту же фотку
+    input.value = '';
+  }
+  else if (pristine.validate()) {
+    showSuccessMessageModal();
+    imgOverlay.classList.add('hidden');
+    body.classList.remove('modal-open');
+    photoUser.value = '';
+    input.value = '';
+  }
+  else {
+    showErrorMessageModal();
+    imgOverlay.classList.add('hidden');
+    body.classList.remove('modal-open');
+    photoUser.value = '';
+  }
 });
 
