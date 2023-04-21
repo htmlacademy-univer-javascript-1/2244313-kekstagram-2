@@ -48,4 +48,4 @@ function hashtagsValid(value) {
   }
   else { return false; }
 }
-export{input,hashtagsValid};
+export { input, hashtagsValid, inputComments};

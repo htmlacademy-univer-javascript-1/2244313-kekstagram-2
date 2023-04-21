@@ -1,16 +1,16 @@
 import './hashtadsvalid.js';
-import { input,hashtagsValid } from './hashtadsvalid.js';
+import { input, hashtagsValid, inputComments } from './hashtadsvalid.js';
 const imgOverlay = document.querySelector('.img-upload__overlay');
 const start = document.querySelector('.img-upload__start input');
 
 const photoUser = document.querySelector('#upload-file');
 
 const body=document.querySelector('body');
-const imgPreview = document.querySelector('.img-upload__preview img');//для замены на пользовательское
+//const imgPreview = document.querySelector('.img-upload__preview img');//для замены на пользовательское
 start.onchange = function () {
   imgOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  imgPreview.src = photoUser.value;
+  // imgPreview.src = photoUser.value;
 };
 
 const cancel = document.querySelector('.img-upload__cancel');
@@ -86,6 +86,7 @@ form.addEventListener('submit', (evt) => {
     body.classList.remove('modal-open');
     photoUser.value = '';//позволяет загрузить одну и ту же фотку
     input.value = '';
+    inputComments.value = '';
   }
   else if (pristine.validate()) {
     showSuccessMessageModal();
