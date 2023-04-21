@@ -1,5 +1,6 @@
 
 import {getRandomPositiveInteger, createRandom } from './util.js';
+//import { createThumbnail } from './miniatures.js';
 const PHOTOLENGTH = 25;
 const generateNumberId = createRandom(1, PHOTOLENGTH);
 const generateNumberUrl = createRandom(1, PHOTOLENGTH);
@@ -38,8 +39,5 @@ const createDescriptionPhotoUser = () => ({
 
 //Функция, для вызова N-го количества раз
 const numberPhotoUsers = Array.from({ length: PHOTOLENGTH }, createDescriptionPhotoUser);
-
-// eslint-disable-next-line no-unused-expressions
-
 export { numberPhotoUsers, createComment, createDescriptionPhotoUser };
 

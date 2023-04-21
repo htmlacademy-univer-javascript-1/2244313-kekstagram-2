@@ -117,11 +117,11 @@
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper">
-                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" metod="post" action="https://26.javascript.pages.academy/kekstagram "
+                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" metod="post" action="https://26.javascript.pages.academy/kekstagram"
                     minlength="2" maxlength="20">
                   </div>
                   <div class="img-upload__field-wrapper">
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
+                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"metod="post" action="https://26.javascript.pages.academy/kekstagram" ></textarea>
                   </div>
                 </fieldset>
 
@@ -208,6 +208,17 @@
       </p>
     </a>
   </template>
+<!-- Шаблон комментария -->
+<template id="comment">
+  <li class="social__comment">
+    <img
+      class="social__picture"
+      src=""
+      alt=""
+      width="35" height="35">
+    <p class="social__text"></p>
+  </li>
+</template>
 
   <!-- Сообщение с ошибкой загрузки изображения -->
   <template id="error">
