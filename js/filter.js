@@ -3,7 +3,7 @@ const effectList = document.querySelectorAll('.effects__item input ');
 const img = document.querySelector('.img-upload__preview img');
 const slider = document.querySelector('.effect-level__slider');
 const sliderValue = document.querySelector('.effect-level__value');
-//const sliderElement = document.querySelector('.effect-level');
+const sliderElement = document.querySelector('.effect-level');
 
 const filterUpdate = {
   none: [0, 100, 1, '', ''],
@@ -36,22 +36,31 @@ function effectСhoice(value,update){
     step: update[2],
     connect: 'lower',
   });
-  sliderUpdateFilter(update);
+  // sliderUpdateFilter(update);
+  slider.noUiSlider.on('update', () => {
+    sliderValue.value = slider.noUiSlider.get();
+    if (value === 'none') {
+      img.style.filter = '';
+    }
+    img.style.filter = `${update[3]}(${sliderValue.value}${update[4]})`;
+  });
 }
-
+/*
 function sliderUpdateFilter(val){
   slider.noUiSlider.on('update', () => {
     sliderValue.value = slider.noUiSlider.get();
-    img.style.filter =`${val[3]}(${val[1]}+${val[4]})`;
-    console.log(sliderValue.value);
+    img.style.filter = `${val[3]}(${sliderValue.value}${val[4]})`;
   });
 }
-
+*/
 function effectUser(){
-  effectList.forEach((Element)=>{
-    const effectClick = String(Element.value);
-    Element.addEventListener( 'change',() =>{
+  effectList.forEach((effectElement) => {
+    const effectClick = String(effectElement.value);
+    sliderElement.classList.add('hidden');
+    effectElement.addEventListener( 'change',() =>{
       effectСhoice(effectClick,filterUpdate[effectClick]);
+      if (effectClick !== 'none') { sliderElement.classList.remove('hidden'); }
+      else { sliderElement.classList.add('hidden'); }
     },);
   });
 }
