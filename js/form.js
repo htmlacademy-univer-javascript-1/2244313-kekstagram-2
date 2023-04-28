@@ -10,9 +10,10 @@ const body=document.querySelector('body');
 start.onchange = function () {
   imgOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  // imgPreview.src = photoUser.value;
+  //imgPreview.src = photoUser.value;
 };
-
+imgOverlay.classList.remove('hidden');
+body.classList.add('modal-open');
 const cancel = document.querySelector('.img-upload__cancel');
 cancel.addEventListener('click', () => {
   imgOverlay.classList.add('hidden');
