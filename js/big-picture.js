@@ -50,7 +50,7 @@ document.addEventListener('keydown', (evt) => {
     commentsList.innerHTML = '';
   }
 });
-
+const COMMENTS_TO_SHOW=5;
 // генерация открытых превьюшек
 const createBigPhoto = (miniatures, description,likes,comments) => {
   bigPictureImg.querySelector('img').src = miniatures.querySelector('.picture__img').src;
@@ -61,26 +61,40 @@ const createBigPhoto = (miniatures, description,likes,comments) => {
   comments.slice(0,5).forEach((comment) => {
     const newComment = createCommentPhotoUser(comment);
     commentsList.appendChild(newComment);
-
   });
+  //если комментов до 5
   if (commentsCount.textContent <= showFiveComments) {
     socialCommentsCount.firstChild.textContent = ` ${commentsCount.textContent} из  `;
     loaderButton.classList.add('hidden'); }
+  //если комментов больше 5
   if (commentsCount.textContent > showFiveComments) {
     socialCommentsCount.firstChild.textContent = ` ${showFiveComments} из  `;
+    //клик по кнопке загрузить еще
     loaderButton.addEventListener('click', () => {
-      comments.slice(5).forEach((comment) => {
+      //загрузка вторых 5 комментариев
+      comments.slice(commentsList.children.length, COMMENTS_TO_SHOW + commentsList.children.length).forEach((comment) => {
         const newComment = createCommentPhotoUser(comment);
         commentsList.appendChild(newComment);
       });
-      socialCommentsCount.firstChild.textContent = ` ${commentsCount.textContent} из  `;
-      loaderButton.classList.add('hidden');
-    }, { once: true });
+      //если комментов 6-10 штук
+      if (commentsList.children.length === Number(commentsCount.textContent)) {
+        loaderButton.classList.add('hidden');
+        socialCommentsCount.firstChild.textContent = ` ${commentsCount.textContent} из  `;
+      }
+      //если больше 10
+      else { socialCommentsCount.firstChild.textContent = ` ${commentsList.children.length} из  ` ;
+        loadingComments(comments);
+      }
+    }, { once: true }
+    );
 
   }
   openBigPicture();
   bigPictureCansel.addEventListener('click',close);
+  commentsList.removeEventListener('click', loadingComments);
 };
-
+//функция для подгрузки комментариев???
+function loadingComments(comments){
+}
 export { createBigPhoto,createCommentPhotoUser};
 
