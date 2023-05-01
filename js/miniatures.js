@@ -1,4 +1,3 @@
-import { numberPhotoUsers } from './data.js';
 import { createBigPhoto } from './big-picture.js';
 
 const miniaturesFragment = document.createDocumentFragment();
@@ -22,6 +21,6 @@ const createMiniatures = (description) => {
   miniaturesList.appendChild(miniaturesFragment);
 
 };
-createMiniatures(numberPhotoUsers);
+//createMiniatures(numberPhotoUsers);
 
 export { createMiniatures,miniaturesList };
