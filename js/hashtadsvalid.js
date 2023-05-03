@@ -1,6 +1,7 @@
 const input = document.querySelector('.text__hashtags');//относится к хештегу!
 const inputComments = document.querySelector('.text__description');
 const MAX_HASHTAG_NUMBERS = 5;
+const MAX_COMMENTS_LENGTH = 140;
 //отмена escape для хештегов и комментов
 input.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
@@ -14,6 +15,13 @@ inputComments.addEventListener('keydown', (evt) => {
     evt.stopPropagation();
   }
 });
+function commentLength() {
+  const injectedСomments = inputComments.value;
+  if (injectedСomments.length > MAX_COMMENTS_LENGTH) {
+    return false;
+  }
+  return true;
+}
 //валидация хештегов
 //ПРОВЕРКА ПО СИМВОЛАМ
 function isEveryHashtagSymbolsValid(elem) {
@@ -44,9 +52,10 @@ function areHashtagsUnique() {
 
 function hashtagsValid(value) {
   const hashtags = value.toLowerCase().trim().split(' ');
-  if (isAmountValid(hashtags) && areHashtagsUnique(hashtags) && isHashtagSymbolsValid(hashtags)) {
+  const injectedСomments = input.value.toLowerCase().trim().split(' ');
+  if (isAmountValid(hashtags) && areHashtagsUnique(hashtags) && isHashtagSymbolsValid(hashtags) && commentLength(injectedСomments)) {
     return true;
   }
   else { return false; }
 }
-export { input, hashtagsValid, inputComments, isEveryHashtagSymbolsValid,isAmountValid,areHashtagsUnique};
+export { input, hashtagsValid, inputComments, isEveryHashtagSymbolsValid, isAmountValid, areHashtagsUnique, commentLength };
