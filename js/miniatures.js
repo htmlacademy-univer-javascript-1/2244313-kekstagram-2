@@ -1,5 +1,4 @@
 import { createBigPhoto } from './big-picture.js';
-
 const miniaturesFragment = document.createDocumentFragment();
 //куда добавлять итог
 const miniaturesList = document.querySelector('.pictures');

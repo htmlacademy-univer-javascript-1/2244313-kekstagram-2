@@ -1,5 +1,5 @@
 import './hashtadsvalid.js';
-import { input, hashtagsValid, inputComments,isAmountValid,isEveryHashtagSymbolsValid,areHashtagsUnique } from './hashtadsvalid.js';
+import { input, hashtagsValid, inputComments,isAmountValid,isEveryHashtagSymbolsValid,areHashtagsUnique,commentLength } from './hashtadsvalid.js';
 import { showAlert } from './util.js';
 import { sliderValue,sliderElement,img } from './filter.js';
 import { sendData } from './api.js';
@@ -9,6 +9,7 @@ const start = document.querySelector('.img-upload__start input');
 const photoUser = document.querySelector('#upload-file');
 const body=document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
+const description = form.querySelector('.text__description');
 const hashtags = form.querySelector('.text__hashtags');
 const submitButton = document.querySelector('#upload-submit');
 //const imgPreview = document.querySelector('.img-upload__preview img');//для замены на пользовательское
@@ -108,6 +109,7 @@ const formValidateCheck = () => {
   pristine.addValidator(hashtags, isEveryHashtagSymbolsValid, 'Хэш-тег должен начинается с символа #, должен состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации, эмодзи и т. д.');
   pristine.addValidator(hashtags, areHashtagsUnique, 'Хэш-теги не должны повторяться');
   pristine.addValidator(hashtags, isAmountValid, 'Хэш-тегов не должно быть больше 5');
+  pristine.addValidator(description, commentLength, 'Длина комментария не может составлять больше 140 символов');
 };
 formValidateCheck();
 //отправка формы
