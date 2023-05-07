@@ -7,7 +7,6 @@ const scaleValueMin = 25;
 const scaleValueMax = 100;
 inputScale.value= `${100 }%`;
 
-
 function clickSmallerButton (){
   smallerButton.addEventListener('click',() => {
     let newValue = inputScale.value.replace('%', '');

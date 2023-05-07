@@ -1,4 +1,4 @@
-//import { openWindow } from './form.js';
+
 //окно с фото
 const activeImg = document.querySelector('.big-picture');
 const body = document.querySelector('body');
@@ -47,10 +47,7 @@ function close(){
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    activeImg.classList.add('hidden');
-    body.classList.remove('modal-open');
-    commentsLoader.classList.remove('hidden');
-    commentsList.innerHTML = '';
+    close();
   }
 });
 let arrayComments = [];
@@ -89,5 +86,5 @@ function loadingCommentsClick() {
   }
   socialCommentsCount.firstChild.textContent = `${commentsList.children.length} из  `;
 }
-export { createBigPhoto,createCommentPhotoUser};
+export { createBigPhoto};
 
