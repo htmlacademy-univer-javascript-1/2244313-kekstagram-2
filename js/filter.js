@@ -45,14 +45,6 @@ function effectСhoice(value,update){
     img.style.filter = `${update[3]}(${sliderValue.value}${update[4]})`;
   });
 }
-/*
-function sliderUpdateFilter(val){
-  slider.noUiSlider.on('update', () => {
-    sliderValue.value = slider.noUiSlider.get();
-    img.style.filter = `${val[3]}(${sliderValue.value}${val[4]})`;
-  });
-}
-*/
 function effectUser(){
   effectList.forEach((effectElement) => {
     const effectClick = String(effectElement.value);

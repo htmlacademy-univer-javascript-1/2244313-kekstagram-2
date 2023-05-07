@@ -22,7 +22,7 @@ function createRandom(min, max) {
   };
 }
 //функция об ошибке отправки данных на сервер
-const ALERT_SHOW_TIME = 5000;
+const ALERT_SHOW_TIME = 7000;
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
@@ -33,7 +33,7 @@ const showAlert = (message) => {
   alertContainer.style.padding = '10px 3px';
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
+  alertContainer.style.backgroundColor = '#ff4e4e';
 
   alertContainer.textContent = message;
 
@@ -53,4 +53,14 @@ const unblockSubmitButton = (submitButton) => {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
 };
-export { getRandomPositiveInteger, createRandom,showAlert,blockSubmitButton,unblockSubmitButton};
+
+function debounce(callback, timeoutDelay) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+export { getRandomPositiveInteger, createRandom,showAlert,blockSubmitButton,unblockSubmitButton,debounce};
